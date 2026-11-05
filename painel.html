@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mar de Antunes — Painel ao vivo</title>
+<meta name="robots" content="noindex, nofollow">
+<style>
+:root{
+  --bg:#07121f; --bg2:#0c1b2c; --card:#0f2238; --line:#1d3149;
+  --tx:#eef3f8; --mut:#8ea3b8;
+  --ac:#d9ab45; --ac2:#f2d27f; --rs:#ff4d5e; --vd:#3fa66a;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--tx);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+body{min-height:100vh;padding:22px 26px 40px}
+h1{font-size:19px;margin:0 0 2px;letter-spacing:.2px}
+.sub{color:var(--mut);font-size:13px;margin:0 0 18px}
+.topbar{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:14px;margin-bottom:18px}
+.status{font-size:12px;color:var(--mut);display:flex;align-items:center;gap:8px}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--vd);box-shadow:0 0 0 0 rgba(63,166,106,.6);animation:pulse 2s infinite}
+.dot.off{background:var(--rs);animation:none}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(63,166,106,.55)}70%{box-shadow:0 0 0 7px rgba(63,166,106,0)}100%{box-shadow:0 0 0 0 rgba(63,166,106,0)}}
+
+.totals{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px}
+.tcard{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 18px;min-width:120px}
+.tcard b{display:block;font-size:22px;line-height:1.1}
+.tcard span{font-size:11px;color:var(--mut);text-transform:uppercase;letter-spacing:.4px}
+.tcard.v b{color:var(--vd)} .tcard.r b{color:var(--rs)} .tcard.d b{color:var(--ac2)} .tcard.p b{color:#fff}
+.bar{height:8px;border-radius:5px;overflow:hidden;display:flex;width:100%;background:#162a40;margin-top:8px;max-width:420px}
+.bar i{display:block;height:100%}
+
+.rank{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px}
+.rchip{background:linear-gradient(135deg,#17304a,#0f2238);border:1px solid var(--line);border-radius:10px;padding:8px 14px;font-size:13px;display:flex;align-items:center;gap:8px}
+.rchip b{color:var(--ac2)}
+.rchip .pct{color:var(--mut);font-size:12px}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px;transition:border-color .3s}
+.card.top1{border-color:#f2d27f;box-shadow:0 0 0 1px rgba(242,210,127,.35)}
+.card.top2{border-color:#9db6c9}
+.card.top3{border-color:#8a6a3f}
+.chdr{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}
+.chdr b{font-size:13px}
+.medal{font-size:13px}
+.cnts{font-size:11px;color:var(--mut);margin-bottom:8px;display:flex;gap:8px;flex-wrap:wrap}
+.cnts em{font-style:normal;font-weight:600}
+.cnts .v{color:var(--vd)} .cnts .r{color:var(--rs)}
+.units{display:grid;grid-template-columns:repeat(auto-fill,minmax(30px,1fr));gap:3px}
+.u{aspect-ratio:1;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:8.5px;font-weight:700;color:#07121f;background:var(--ac2)}
+.u.r{background:var(--rs);color:#fff}
+.u.v{background:var(--vd);color:#07121f}
+
+.sec{margin:26px 0 10px;font-size:13px;color:var(--mut);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--line);padding-bottom:6px}
+footer{margin-top:28px;color:var(--mut);font-size:11px}
+
+.card.zoomable{cursor:pointer}
+.card.zoomable:hover{border-color:var(--ac2)}
+.zoomhint{font-size:10px;color:var(--mut);margin-top:6px;text-align:right}
+
+#lb{position:fixed;inset:0;background:rgba(5,10,16,.92);display:none;align-items:center;justify-content:center;z-index:50;padding:24px}
+#lb.open{display:flex}
+#lbbox{background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:16px;max-width:min(94vw,1500px);max-height:92vh;overflow:auto}
+#lbhdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;gap:14px}
+#lbhdr b{font-size:15px}
+#lbx{background:none;border:1px solid var(--line);color:var(--tx);border-radius:8px;width:30px;height:30px;cursor:pointer;font-size:15px}
+#lbimgwrap{position:relative;line-height:0}
+#lbimgwrap img{display:block;max-width:100%;max-height:72vh;width:auto;border-radius:8px}
+
+/* planta com pinos reais (mesmo estilo do site) */
+.hs{position:absolute;border:1.5px solid rgba(15,150,180,0);background:rgba(217,171,69,0)}
+.hs.r{background:rgba(255,77,94,.42)} .hs.v{background:rgba(63,166,106,.42)}
+.pin{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);min-width:30px;height:30px;padding:0 4px;border-radius:15px;background:#0b1727;color:var(--ac);border:1.5px solid var(--ac);font:700 11px monospace;display:grid;place-items:center}
+.hs.r .pin{border-color:var(--rs);color:var(--rs);background:#2a0d12}
+.hs.v .pin{border-color:var(--vd);color:var(--vd);background:#0d2a18}
+.hs.dn .pin{min-width:0;width:17px;height:17px;padding:0;border-radius:50%;font-size:7.5px;border-width:1px}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div>
+    <h1>Mar de Antunes — Painel ao vivo</h1>
+    <p class="sub">Reservas e vendas em tempo real, por pavimento e bloco. Clique num pavimento pra ver a planta real.</p>
+  </div>
+  <div class="status"><span class="dot" id="dot"></span><span id="statusTxt">conectando…</span></div>
+</div>
+
+<div class="totals" id="totals"></div>
+<div class="rank" id="rank"></div>
+
+<div id="blocks"></div>
+
+<footer>Atualiza automaticamente a cada 5 segundos. Esta página não aparece para os clientes — não compartilhe o link.</footer>
+
+<div id="lb">
+  <div id="lbbox">
+    <div id="lbhdr"><b id="lbttl"></b><button id="lbx" onclick="closeLB()">✕</button></div>
+    <div id="lbimgwrap"></div>
+  </div>
+</div>
+
+<script src="painel-data.js"></script>
+<script>
+var WORKER_URL="https://mardeantunes.comercial-freitasconstrucoes.workers.dev";
+
+// ---- estrutura do empreendimento (mesma numeração usada no app) ----
+var APT_BLOCKS=[
+  {id:"A",nome:"Bloco A",floors:[
+    {pref:"1",label:"Térreo",n:9,k:"T"},{pref:"2",label:"1º Pavimento",n:9,k:"P1"},
+    {pref:"3",label:"2º Pavimento",n:9,k:"P2"},{pref:"4",label:"3º Pavimento",n:9,k:"P3"},
+    {pref:"5",label:"4º Pavimento",n:9,k:"P4"}
+  ]},
+  {id:"B",nome:"Bloco B",floors:[
+    {pref:"1",label:"Térreo",n:9,k:"BBT"},{pref:"2",label:"1º Pavimento",n:9,k:"BBP1"},
+    {pref:"3",label:"2º Pavimento",n:18,k:"BBP2"},{pref:"4",label:"3º Pavimento",n:18,k:"BBP3"},
+    {pref:"5",label:"4º Pavimento",n:18,k:"BBP4"}
+  ]},
+  {id:"C",nome:"Bloco C",floors:[
+    {pref:"1",label:"Térreo",n:9,k:"CT"},{pref:"2",label:"1º Pavimento",n:18,k:"CP1"},
+    {pref:"3",label:"2º Pavimento",n:18,k:"CP2"},{pref:"4",label:"3º Pavimento",n:18,k:"CP3"}
+  ]},
+  {id:"D",nome:"Bloco D",floors:[
+    {pref:"1",label:"Térreo",n:9,k:"DT"},{pref:"2",label:"1º Pavimento",n:18,k:"DP1"},
+    {pref:"3",label:"2º Pavimento",n:18,k:"DP2"},{pref:"4",label:"3º Pavimento",n:18,k:"DP3"}
+  ]}
+];
+var CASAS=[
+  {id:"B1",nome:"Casas tipo 1",from:1,to:21},
+  {id:"B2",nome:"Casas tipo 2",from:22,to:33}
+];
+
+function pad(n){return String(n).length<2?"0"+n:String(n)}
+
+// monta a lista de "cards" (um por pavimento + um por tipo de casa)
+var CARDS=[];
+APT_BLOCKS.forEach(function(bl){
+  bl.floors.forEach(function(fl){
+    var units=[];
+    for(var i=1;i<=fl.n;i++){
+      var disp=fl.pref+pad(i);
+      units.push({key:bl.id+"-"+disp,disp:disp,suf:pad(i)});
+    }
+    CARDS.push({title:bl.nome+" · "+fl.label,units:units,nivKey:fl.k});
+  });
+});
+CASAS.forEach(function(c){
+  var units=[];
+  for(var i=c.from;i<=c.to;i++){
+    units.push({key:c.id+"-C"+pad(i),disp:"Casa "+i});
+  }
+  CARDS.push({title:c.nome,units:units});
+});
+
+var TOTAL_UNITS=CARDS.reduce(function(a,c){return a+c.units.length},0);
+
+var CURRENT_SRV={};
+function render(SRV){
+  CURRENT_SRV=SRV||{};
+  var totV=0,totR=0,totD=0;
+  var cardsHtml=CARDS.map(function(c){
+    var v=0,r=0;
+    c.unitsHtml=c.units.map(function(u){
+      var s=SRV[u.key]||"d";
+      if(s==="v"){v++;totV++} else if(s==="r"){r++;totR++} else {totD++}
+      var cls=s==="v"?"v":(s==="r"?"r":"");
+      return '<div class="u '+cls+'" title="'+u.disp+'">'+u.disp+'</div>';
+    }).join("");
+    c._v=v;c._r=r;c._d=c.units.length-v-r;c._score=v*2+r;
+    return c;
+  });
+
+  // ranking: pavimentos/tipos com mais reservas+vendas (peso maior para venda)
+  var ranked=cardsHtml.slice().sort(function(a,b){return b._score-a._score}).filter(function(c){return c._score>0}).slice(0,3);
+  var medals=["🥇","🥈","🥉"];
+  document.getElementById("rank").innerHTML = ranked.length ? ranked.map(function(c,i){
+    var tot=c.units.length;
+    var pct=Math.round(((c._v+c._r)/tot)*100);
+    return '<div class="rchip">'+medals[i]+' <b>'+c.title+'</b><span class="pct">'+c._v+' vendidas · '+c._r+' reservadas · '+pct+'%</span></div>';
+  }).join("") : '<div class="rchip" style="color:var(--mut)">Aguardando as primeiras reservas do evento…</div>';
+
+  var topSet=new Set(ranked.map(function(c){return c.title}));
+
+  document.getElementById("blocks").innerHTML = cardsHtml.map(function(c,idx){
+    var rankIdx=ranked.indexOf(c);
+    var cls=rankIdx===0?"top1":rankIdx===1?"top2":rankIdx===2?"top3":"";
+    var medal=rankIdx>=0?medals[rankIdx]:"";
+    var zoomable=!!c.nivKey;
+    return '<div class="card '+cls+(zoomable?" zoomable":"")+'"'+(zoomable?' onclick="openLB('+idx+')"':'')+'>'+
+      '<div class="chdr"><b>'+c.title+'</b><span class="medal">'+medal+'</span></div>'+
+      '<div class="cnts"><em class="v">'+c._v+'</em> vendidas &nbsp;·&nbsp; <em class="r">'+c._r+'</em> reservadas &nbsp;·&nbsp; '+c._d+' disponíveis</div>'+
+      '<div class="units">'+c.unitsHtml+'</div>'+
+      (zoomable?'<div class="zoomhint">🔍 ver planta real</div>':'')+
+      '</div>';
+  }).join("");
+
+  var pctDone=Math.round(((totV+totR)/TOTAL_UNITS)*100);
+  document.getElementById("totals").innerHTML =
+    '<div class="tcard p"><b>'+TOTAL_UNITS+'</b><span>Unidades no empreendimento</span></div>'+
+    '<div class="tcard v"><b>'+totV+'</b><span>Vendidas</span></div>'+
+    '<div class="tcard r"><b>'+totR+'</b><span>Reservadas</span></div>'+
+    '<div class="tcard d"><b>'+totD+'</b><span>Disponíveis</span></div>'+
+    '<div class="tcard p" style="min-width:220px"><b>'+pctDone+'%</b><span>Do empreendimento já reservado ou vendido</span>'+
+      '<div class="bar"><i style="width:'+((totV/TOTAL_UNITS)*100)+'%;background:var(--vd)"></i><i style="width:'+((totR/TOTAL_UNITS)*100)+'%;background:var(--rs)"></i></div>'+
+    '</div>';
+}
+
+// ---- planta real (lightbox) ----
+var LB_OPEN_IDX=null;
+function statusOf(key){var s=CURRENT_SRV[key];return s==="v"?"v":(s==="r"?"r":"d")}
+function renderLB(){
+  if(LB_OPEN_IDX==null)return;
+  var c=CARDS[LB_OPEN_IDX];
+  var k=c.nivKey,g=GEO[k];
+  if(!g||!IMG[k]){document.getElementById("lbimgwrap").innerHTML='<p style="padding:30px;color:var(--mut)">Planta não disponível para esta visão.</p>';return}
+  var dense=/^(BBP[2-4]|[CD]P[1-3])$/.test(k);
+  var hs="";
+  c.units.forEach(function(u){
+    var r=g.u[u.suf];
+    if(!r)return;
+    var st=statusOf(u.key);
+    hs+='<div class="hs '+st+(dense?" dn":"")+'" style="left:'+r[0]/g.w*100+'%;top:'+r[1]/g.h*100+'%;width:'+(r[2]-r[0])/g.w*100+'%;height:'+(r[3]-r[1])/g.h*100+'%"><span class="pin">'+u.disp+'</span></div>';
+  });
+  document.getElementById("lbttl").textContent=c.title;
+  document.getElementById("lbimgwrap").innerHTML='<img src="'+IMG[k]+'" alt="">'+hs;
+}
+function openLB(idx){LB_OPEN_IDX=idx;renderLB();document.getElementById("lb").classList.add("open")}
+function closeLB(){LB_OPEN_IDX=null;document.getElementById("lb").classList.remove("open")}
+document.addEventListener("keydown",function(e){if(e.key==="Escape")closeLB()});
+document.getElementById("lb").addEventListener("click",function(e){if(e.target.id==="lb")closeLB()});
+
+var lastOk=0;
+function tick(){
+  fetch(WORKER_URL+"/status",{cache:"no-store"}).then(function(r){return r.json()}).then(function(j){
+    render(j||{});
+    renderLB();
+    lastOk=Date.now();
+    document.getElementById("dot").className="dot";
+    document.getElementById("statusTxt").textContent="atualizado agora";
+  }).catch(function(){
+    document.getElementById("dot").className="dot off";
+    var secs=lastOk?Math.round((Date.now()-lastOk)/1000):null;
+    document.getElementById("statusTxt").textContent=secs!=null?("sem conexão — última atualização há "+secs+"s"):"sem conexão";
+  });
+}
+render({});
+tick();
+setInterval(tick,5000);
+</script>
+</body>
+</html>
