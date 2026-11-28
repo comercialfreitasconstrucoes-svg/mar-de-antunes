@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mar de Antunes Resort</title>
+<meta name="description" content="Apresentação exclusiva do Mar de Antunes Resort, na Praia de Antunes, Maragogi/AL.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Mar de Antunes Resort | Apresentação exclusiva">
+<meta property="og:description" content="A realização, o resort e o projeto completo do lançamento.">
+<meta property="og:image" content="https://comercialfreitasconstrucoes-svg.github.io/mar-de-antunes/apresentacao-exclusiva/og.jpg?v=3">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<link rel="artifact-thumbnail" href="og.jpg">
+<meta name="theme-color" content="#0d0e0e">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap" rel="stylesheet">
+<style>
+/* VOICE: silencioso e sofisticado; o conteúdo fala, a interface quase some.
+   IDEA: a apresentação do lançamento, capítulo por capítulo, como numa sala de projeção.
+   PICTURE: os próprios vídeos e páginas, em fundo quase preto, sem molduras.
+   COLOUR and TYPE: preto quente #0d0e0e, areia #d9d3c3, um fio dourado #b8904a; Archivo leve e expandida.
+   LAYOUT: celular em pé primeiro: topo mínimo, palco ao centro, botão de avançar ao alcance do polegar. */
+:root{color-scheme:dark;--bg:#0d0e0e;--bg2:#161717;--ink:#ece7da;--sand:#d9d3c3;--mute:#8d8a82;--line:#2a2b2a;--gold:#b8904a;
+ --top:calc(56px + env(safe-area-inset-top));--bot:calc(76px + env(safe-area-inset-bottom))}
+*{box-sizing:border-box;min-width:0}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 "Archivo",system-ui,sans-serif;overflow:hidden;-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webkit-tap-highlight-color:transparent}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.num{font-variant-numeric:tabular-nums}
+
+/* topo */
+.top{position:fixed;inset:0 0 auto;height:var(--top);padding:env(safe-area-inset-top) 18px 0;display:flex;align-items:center;justify-content:space-between;z-index:30;background:linear-gradient(var(--bg) 60%,transparent);transition:opacity .4s}
+.top img{height:26px;width:auto;opacity:.9}
+.top .where{font-size:13px;color:var(--mute);font-stretch:110%}
+.top .where b{color:var(--sand);font-weight:500}
+.idxbtn{display:flex;align-items:center;gap:8px;height:44px;padding:0 4px 0 12px;font-size:14px;color:var(--sand)}
+.idxbtn i{display:grid;gap:4px}.idxbtn i::before,.idxbtn i::after{content:"";display:block;width:18px;height:1.5px;background:currentColor}
+.top .mid{position:absolute;left:50%;transform:translateX(-50%);top:calc(env(safe-area-inset-top) + 18px)}
+@media(max-width:520px){.top .mid{display:none}}
+
+/* capítulos */
+.ch{position:fixed;inset:0;padding:var(--top) 0 var(--bot);opacity:0;visibility:hidden;transition:opacity .6s ease,visibility 0s .6s;overflow-y:auto;overscroll-behavior:contain}
+.ch.on{opacity:1;visibility:visible;transition:opacity .6s ease}
+.stage{min-height:100%;display:flex;flex-direction:column;justify-content:center;padding:24px 0;max-width:1180px;margin:0 auto}
+.head{padding:0 22px;margin-bottom:22px}
+.kicker{font-size:13px;color:var(--gold);font-stretch:112%;margin:0 0 10px}
+h1,h2{margin:0;font-weight:300;font-stretch:118%;line-height:1.08;letter-spacing:-.01em;text-wrap:balance;color:var(--ink)}
+h2{font-size:clamp(28px,7.4vw,46px)}
+.desc{margin:12px 0 0;color:var(--mute);font-size:15px;max-width:52ch}
+
+/* abertura */
+.open{padding:0}
+.open .bg{position:absolute;inset:-4%;background:#000 url(apresentacao/03.jpg) 46% 50%/cover no-repeat;opacity:.8;animation:breathe 26s ease-in-out infinite alternate}
+@keyframes breathe{from{transform:scale(1.02)}to{transform:scale(1.1)}}
+.open::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,14,14,.2) 0%,rgba(13,14,14,.1) 40%,rgba(13,14,14,.92) 78%,var(--bg) 100%)}
+.open .in{position:relative;z-index:1;min-height:100%;display:flex;flex-direction:column;justify-content:flex-end;padding:0 24px calc(40px + env(safe-area-inset-bottom));max-width:720px;margin:0 auto}
+.open .for{font-size:14px;color:var(--sand);margin:0 0 14px;font-stretch:110%}
+.open h1{line-height:0}.open h1 .mark{width:min(64vw,300px);height:auto;margin:6px 0 4px}
+.open .desc{color:#b9b4a8}
+.start{margin-top:30px;display:flex;align-items:center;justify-content:space-between;gap:16px;width:100%;max-width:420px;min-height:60px;padding:0 10px 0 24px;border-radius:999px;background:var(--ink);color:#111;font-weight:600;font-size:16px;font-stretch:108%}
+.start span.c{width:44px;height:44px;border-radius:50%;background:#111;color:var(--ink);display:grid;place-items:center}
+.start svg{width:16px;height:16px}
+.open .meta{margin-top:18px;font-size:13px;color:var(--mute)}
+
+/* vídeo */
+.screen{position:relative;width:100%;aspect-ratio:16/9;background:#000}
+@media(min-width:760px){.screen{width:min(calc(100% - 44px),calc((100svh - 370px) * 16 / 9));margin:0 auto;border-radius:6px;overflow:hidden}.vmeta,.head{width:min(calc(100% - 44px),max(calc((100svh - 370px) * 16 / 9),520px));margin-left:auto;margin-right:auto;padding-left:0;padding-right:0}}
+.screen video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#000}
+.playover{position:absolute;inset:0;display:none;place-items:center;background:rgba(0,0,0,.35)}
+.playover.show{display:grid}
+.playover span{width:72px;height:72px;border-radius:50%;border:1px solid rgba(255,255,255,.6);display:grid;place-items:center;backdrop-filter:blur(6px);background:rgba(0,0,0,.3)}
+.playover svg{width:22px;height:22px;margin-left:3px}
+.upnext{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:rgba(8,9,9,.86);text-align:center;padding:16px}
+.upnext.show{display:flex}
+.upnext small{color:var(--mute);font-size:13px}
+.upnext b{font-weight:300;font-stretch:115%;font-size:clamp(20px,5vw,28px)}
+.upnext .row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.pill{min-height:46px;padding:0 20px;border-radius:999px;border:1px solid #4a4a46;color:var(--ink);font-size:14px;display:inline-flex;align-items:center;gap:8px;text-decoration:none}
+.pill.solid{background:var(--ink);color:#111;border-color:var(--ink);font-weight:600}
+.vmeta{display:flex;justify-content:space-between;gap:12px;padding:14px 22px 0;color:var(--mute);font-size:13px}
+.vhint{color:var(--mute);font-size:13px;padding:6px 22px 0}
+@media(min-width:760px){.vhint{display:none}}
+
+/* localização */
+.mapwrap{position:relative;height:min(68svh,720px);min-height:420px;background:#03070c}
+@media(min-width:760px){.mapwrap{margin:0 22px;border-radius:6px;overflow:hidden}}
+.mapwrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+
+/* apresentação (feed) */
+.deckhead{padding:0 0 16px}
+.secs{display:flex;gap:8px;overflow-x:auto;padding:0 22px;scrollbar-width:none}
+.secs::-webkit-scrollbar{display:none}
+.secs button{flex:none;min-height:38px;padding:0 14px;border-radius:999px;border:1px solid var(--line);font-size:13px;color:var(--mute)}
+.secs button.on{color:#111;background:var(--sand);border-color:var(--sand)}
+.deckbox{width:100%}
+@media(min-width:760px){.deckbox{width:min(calc(100% - 44px),calc((100svh - 400px) * 16 / 9));margin:0 auto}}
+.feed{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain}
+.feed::-webkit-scrollbar{display:none}
+.pg{position:relative;flex:0 0 100%;scroll-snap-align:center;scroll-snap-stop:always;aspect-ratio:16/9;background:var(--bg2);overflow:hidden;cursor:zoom-in;padding:0}
+@media(min-width:760px){.feed{border-radius:4px}}
+.dctl{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 22px 0}
+@media(min-width:760px){.dctl{padding:14px 0 0}}
+.dctl .cnt{color:var(--sand);font-size:15px}.dctl .cnt span{color:var(--mute)}
+.dctl .arr{display:flex;gap:10px}
+.dctl .arr button{width:48px;height:48px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;color:var(--sand)}
+.dctl .arr button:disabled{opacity:.3}
+.dctl .arr svg{width:18px;height:18px}
+.dtip{color:var(--mute);font-size:13px;padding:8px 22px 0}
+@media(min-width:760px){.dtip{padding:8px 0 0}}
+.pg img{width:100%;height:100%;object-fit:cover;display:block}
+.feedtip{color:var(--mute);font-size:13px;padding:0 22px 12px}
+
+/* visor tela cheia */
+.viewer{position:fixed;inset:0;z-index:60;background:#000;display:none;flex-direction:column}
+.viewer.open{display:flex}
+.viewer .vt{display:flex;justify-content:space-between;align-items:center;padding:calc(8px + env(safe-area-inset-top)) 12px 8px 18px;font-size:14px;color:var(--mute)}
+.xbtn{width:46px;height:46px;border-radius:50%;border:1px solid #3a3a37;display:grid;place-items:center}
+.xbtn svg{width:18px;height:18px}
+.vtrack{flex:1;display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
+.vtrack::-webkit-scrollbar{display:none}
+.vtrack div{flex:0 0 100%;scroll-snap-align:center;display:grid;place-items:center}
+.vtrack img{max-width:100%;max-height:100%;object-fit:contain}
+.viewer .vb{display:flex;justify-content:center;gap:12px;padding:10px 0 calc(14px + env(safe-area-inset-bottom));color:var(--mute);font-size:13px;align-items:center}
+
+/* encerramento */
+.end .in{padding:0 24px;max-width:640px;margin:0 auto;width:100%}
+.end img.logo{width:150px;opacity:.95;margin-bottom:34px}
+.go{margin-top:28px;display:flex;align-items:center;justify-content:space-between;gap:16px;width:100%;min-height:62px;padding:0 10px 0 24px;border-radius:999px;background:var(--gold);color:#fff;text-decoration:none;font-weight:600;font-size:16px;font-stretch:108%}
+.go span.c{width:44px;height:44px;border-radius:50%;background:rgba(0,0,0,.18);display:grid;place-items:center}
+.go svg{width:18px;height:18px}
+.quiet{margin-top:30px;border-top:1px solid var(--line)}
+.quiet a,.quiet button{padding:0;display:flex;justify-content:space-between;align-items:center;width:100%;min-height:58px;border-bottom:1px solid var(--line);text-decoration:none;color:var(--sand);font-size:15px;text-align:left}
+.quiet small{color:var(--mute);font-size:13px}
+.sign{margin-top:26px;color:var(--mute);font-size:13px}
+.legal{margin-top:22px;color:#5f5d57;font-size:12px}
+
+/* barra inferior */
+.bot{position:fixed;inset:auto 0 0;height:var(--bot);padding:0 14px env(safe-area-inset-bottom);display:flex;align-items:center;gap:10px;z-index:30;background:linear-gradient(transparent,var(--bg) 35%);transition:opacity .4s}
+.prev{width:52px;height:52px;flex:none;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;color:var(--sand)}
+.prev svg,.next svg{width:18px;height:18px}
+.next{flex:1;height:52px;border-radius:999px;border:1px solid #3f3f3b;display:flex;align-items:center;justify-content:space-between;padding:0 8px 0 20px;font-size:14px;color:var(--ink);max-width:460px;margin-left:auto}
+.next small{color:var(--mute);margin-right:6px}
+.next span.c{width:38px;height:38px;border-radius:50%;background:var(--ink);color:#111;display:grid;place-items:center}
+.progress{position:fixed;left:0;right:0;top:var(--top);height:1px;z-index:31;background:var(--line)}
+.progress i{display:block;height:100%;width:0;background:var(--gold);transition:width .6s}
+body.intro .top,body.intro .bot,body.intro .progress{opacity:0;pointer-events:none}
+
+/* índice */
+.index{position:fixed;inset:0;z-index:50;background:#0d0e0e;display:none;flex-direction:column;padding:calc(18px + env(safe-area-inset-top)) 22px 22px}
+.index.open{display:flex}
+.index .ih{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;color:var(--mute);font-size:14px}
+.index ol{list-style:none;margin:0 auto;padding:0;width:100%;max-width:620px}
+.index li button{display:flex;align-items:baseline;gap:18px;width:100%;padding:18px 0;border-bottom:1px solid var(--line);text-align:left}
+.index li .k{color:var(--gold);font-size:13px;width:20px}
+.index li .t{flex:1;font-size:21px;font-weight:300;font-stretch:115%}
+.index li .d{color:var(--mute);font-size:13px}
+.index li.cur .t{color:var(--sand)}
+@media(prefers-reduced-motion:reduce){.open .bg{animation:none}.ch{transition:none}}
+</style>
+</head>
+<body class="intro">
+
+<header class="top">
+  <img src="logo-branco.png" alt="Mar de Antunes Resort">
+  <div class="where mid num" id="where"></div>
+  <button type="button" class="idxbtn" id="idxOpen" aria-label="Abrir índice">Índice <i></i></button>
+</header>
+<div class="progress"><i id="prog"></i></div>
+
+<!-- 0 abertura -->
+<section class="ch open on" data-c="0" aria-label="Abertura">
+  <div class="bg"></div>
+  <div class="in">
+    <p class="for" id="for">Apresentação exclusiva</p>
+    <h1><img class="mark" src="logo-branco.png" alt="Mar de Antunes Resort"></h1>
+    <p class="desc">Praia de Antunes, Maragogi. A apresentação completa do lançamento, para assistir no seu tempo.</p>
+    <button type="button" class="start" id="start">Iniciar apresentação <span class="c"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></button>
+  </div>
+</section>
+
+<!-- 1 vídeo da diretoria -->
+<section class="ch" data-c="1" aria-label="A realização">
+  <div class="stage">
+    <div class="head"><p class="kicker">Capítulo 1</p><h2>A realização</h2><p class="desc">O início de tudo, contado por quem idealizou o projeto.</p></div>
+    <div class="slot" data-v="destino" data-dur="1:52"></div>
+  </div>
+</section>
+
+<!-- 2 vídeo do resort -->
+<section class="ch" data-c="2" aria-label="O resort">
+  <div class="stage">
+    <div class="head"><p class="kicker">Capítulo 2</p><h2>O resort</h2><p class="desc">O conceito, a estrutura e a experiência, em uma visão completa.</p></div>
+    <div class="slot" data-v="lifestyle" data-dur="1:08"></div>
+  </div>
+</section>
+
+<!-- 3 apresentação -->
+<section class="ch" data-c="3" aria-label="O projeto" id="deckCh">
+  <div class="stage">
+    <div class="head"><p class="kicker">Capítulo 3</p><h2>O projeto</h2><p class="desc">Conheça os detalhes do nosso Mar de Antunes Resort.</p></div>
+    <div class="deckhead"><div class="secs" id="secs"></div></div>
+    <div class="deckbox">
+      <div class="feed" id="feed" tabindex="0" aria-label="Páginas da apresentação"></div>
+      <div class="dctl"><span class="cnt num" id="dcount">1 <span>/ 87</span></span>
+        <div class="arr"><button type="button" id="dprev" aria-label="Página anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M15 5l-7 7 7 7"/></svg></button><button type="button" id="dnext" aria-label="Próxima página"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 5l7 7-7 7"/></svg></button></div></div>
+      <p class="dtip">Deslize para o lado ou use as setas. Toque na página para ampliar.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 4 vídeo com as pessoas no resort -->
+<section class="ch" data-c="4" aria-label="Viver o Mar de Antunes">
+  <div class="stage">
+    <div class="head"><p class="kicker">Capítulo 4</p><h2>Viver o Mar de Antunes</h2><p class="desc">Um dia no resort, antes mesmo de ele existir.</p></div>
+    <div class="slot" data-v="empreendimento" data-dur="1:53"></div>
+  </div>
+</section>
+
+<!-- 5 encerramento -->
+<section class="ch end" data-c="5" aria-label="Reserve sua unidade">
+  <div class="stage">
+    <div class="in">
+      <img class="logo" src="logo-branco.png" alt="Mar de Antunes Resort">
+      <p class="kicker">Para finalizar</p>
+      <h2>Reserve sua unidade</h2>
+      <p class="desc">Escolha sua unidade e conheça a planta, os valores e as condições.</p>
+      <a class="go" href="https://comercialfreitasconstrucoes-svg.github.io/mar-de-antunes/" target="_blank" rel="noopener">Encontrar minha unidade <span class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+      <div class="quiet">
+        <a id="wa" href="https://wa.me/5581987893090" target="_blank" rel="noopener">Falar com a Érica no WhatsApp <small>(81) 98789-3090</small></a>
+        <button type="button" id="again">Assistir novamente <small>desde o início</small></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<nav class="bot" aria-label="Navegação">
+  <button type="button" class="prev" id="prev" aria-label="Capítulo anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M15 5l-7 7 7 7"/></svg></button>
+  <button type="button" class="next" id="next"><span><small>Próximo</small><b id="nextName" style="font-weight:500"></b></span><span class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5l7 7-7 7"/></svg></span></button>
+</nav>
+
+<div class="index" id="index" role="dialog" aria-modal="true" aria-label="Índice">
+  <div class="ih"><span>Índice</span><button type="button" class="xbtn" id="idxClose" aria-label="Fechar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+  <ol id="idxList"></ol>
+</div>
+
+<div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-label="Página ampliada">
+  <div class="vt"><span class="num" id="vcount"></span><button type="button" class="xbtn" id="vclose" aria-label="Fechar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+  <div class="vtrack" id="vtrack"></div>
+  <div class="vb">Deslize para o lado · gire o celular para ver maior</div>
+</div>
+
+<script>
+{
+const CH = [
+  {t:'Abertura'},
+  {t:'A realização', d:'Vídeo · 1:52'},
+  {t:'O resort', d:'Vídeo · 1:08'},
+  {t:'O projeto', d:'87 páginas'},
+  {t:'Viver o Mar de Antunes', d:'Vídeo · 1:53'},
+  {t:'Reserve sua unidade', d:'Unidades e valores'}
+];
+const LAST = CH.length - 1;
+const N = 87;
+const SECS = [['Visão geral',1],['Casas',11],['Bloco A',19],['Bloco B',41],['Blocos C e D',57],['Lazer',70]];
+const src = i => 'apresentacao/' + String(i).padStart(2,'0') + '.jpg';
+const $ = id => document.getElementById(id);
+const chs = [...document.querySelectorAll('.ch')];
+let cur = 0;
+
+// nome do cliente: link?n=Nome
+let nome = '';
+try { nome = (new URLSearchParams(location.search).get('n') || '').trim().slice(0,40); } catch(e) {}
+if (nome) { const f = nome.split(/\s+/)[0]; $('for').textContent = 'Apresentação exclusiva para ' + f.charAt(0).toUpperCase() + f.slice(1); }
+$('wa').href = 'https://wa.me/5581987893090?text=' + encodeURIComponent('Olá, Érica! Assisti à apresentação do Mar de Antunes Resort e gostaria de conversar.' + (nome ? ' (' + nome + ')' : ''));
+
+// um único player, reaproveitado em todos os capítulos (mantém o som liberado no celular)
+const screen = document.createElement('div'); screen.className = 'screen';
+screen.innerHTML = '<video id="player" playsinline controls preload="metadata"></video>'
+ + '<button type="button" class="playover" id="playover" aria-label="Assistir"><span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></button>'
+ + '<div class="upnext" id="upnext"><small>A seguir</small><b id="unName"></b><div class="row"><button type="button" class="pill" id="unReplay">Ver de novo</button><button type="button" class="pill solid" id="unGo">Continuar</button></div></div>';
+const player = screen.querySelector('video');
+const q = sel => screen.querySelector(sel);
+const vmeta = document.createElement('div'); vmeta.className = 'vmeta';
+const vhint = document.createElement('div'); vhint.className = 'vhint'; vhint.textContent = 'Para ver maior, toque em tela cheia no vídeo.';
+let upTimer = 0;
+const tryPlay = () => { const p = player.play(); if (p && p.catch) p.catch(() => q('#playover').classList.add('show')); };
+const mountVideo = slot => {
+  clearTimeout(upTimer); q('#upnext').classList.remove('show'); q('#playover').classList.remove('show');
+  slot.append(screen, vmeta, vhint);
+  const name = slot.dataset.v;
+  if (!player.src.endsWith('videos/' + name + '.mp4')) { player.poster = 'videos/' + name + '.jpg'; player.src = 'videos/' + name + '.mp4'; }
+  vmeta.innerHTML = '<span>Vídeo</span><span class="num">' + slot.dataset.dur + '</span>';
+  player.currentTime = 0; tryPlay();
+};
+q('#playover').onclick = () => { q('#playover').classList.remove('show'); player.play().catch(() => {}); };
+player.addEventListener('playing', () => q('#playover').classList.remove('show'));
+player.addEventListener('ended', () => {
+  if (document.fullscreenElement) { try { document.exitFullscreen(); } catch(e) {} }
+  if (player.webkitDisplayingFullscreen) { try { player.webkitExitFullscreen(); } catch(e) {} }
+  q('#unName').textContent = CH[cur + 1] ? CH[cur + 1].t : '';
+  q('#upnext').classList.add('show');
+  upTimer = setTimeout(() => show(cur + 1), 6000);
+});
+q('#unGo').onclick = () => show(cur + 1);
+q('#unReplay').onclick = () => { clearTimeout(upTimer); q('#upnext').classList.remove('show'); player.currentTime = 0; tryPlay(); };
+
+// apresentação em feed
+const feed = $('feed');
+feed.innerHTML = Array.from({length:N}, (_, k) => k + 1).map(i =>
+  '<button type="button" class="pg" data-i="' + i + '" id="pg' + i + '"><img src="' + src(i) + '" alt="Página ' + i + ' da apresentação" width="1600" height="900"' + (i > 2 ? ' loading="lazy"' : '') + '></button>').join('');
+$('secs').innerHTML = SECS.map(s => '<button type="button" data-p="' + s[1] + '">' + s[0] + '</button>').join('');
+const dIdx = () => Math.round(feed.scrollLeft / feed.clientWidth) + 1;
+const goPage = (i, smooth = true) => { i = Math.max(1, Math.min(N, i)); feed.scrollTo({left: (i - 1) * feed.clientWidth, behavior: smooth ? 'smooth' : 'auto'}); };
+$('secs').addEventListener('click', e => { const b = e.target.closest('button'); if (b) goPage(+b.dataset.p, false); });
+$('dprev').onclick = () => goPage(dIdx() - 1);
+$('dnext').onclick = () => goPage(dIdx() + 1);
+const markSec = () => {
+  const i = dIdx(); let on = 0;
+  SECS.forEach((s, k) => { if (i >= s[1]) on = k; });
+  const btns = $('secs').querySelectorAll('button');
+  btns.forEach((b, k) => b.classList.toggle('on', k === on));
+  if (btns[on]) { const sc = $('secs'); sc.scrollTo({left: btns[on].offsetLeft - 22, behavior: 'smooth'}); }
+  $('dcount').innerHTML = i + ' <span>/ ' + N + '</span>';
+  $('dprev').disabled = i === 1; $('dnext').disabled = i === N;
+};
+let raf = 0; feed.addEventListener('scroll', () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(markSec); });
+markSec();
+
+// visor de página
+const vtrack = $('vtrack'); let vBuilt = false;
+const vIdx = () => Math.round(vtrack.scrollLeft / vtrack.clientWidth) + 1;
+feed.addEventListener('click', e => {
+  const b = e.target.closest('.pg'); if (!b) return;
+  if (!vBuilt) { vtrack.innerHTML = Array.from({length:N}, (_, k) => '<div><img src="' + src(k + 1) + '" alt="Página ' + (k + 1) + '" loading="lazy"></div>').join(''); vBuilt = true; }
+  $('viewer').classList.add('open');
+  requestAnimationFrame(() => { vtrack.scrollLeft = (b.dataset.i - 1) * vtrack.clientWidth; $('vcount').textContent = b.dataset.i + ' / ' + N; });
+});
+vtrack.addEventListener('scroll', () => { $('vcount').textContent = vIdx() + ' / ' + N; });
+const closeViewer = () => { const i = vIdx(); $('viewer').classList.remove('open'); goPage(i, false); };
+$('vclose').onclick = closeViewer;
+
+// navegação entre capítulos
+const show = (i, fromHash) => {
+  i = Math.max(0, Math.min(LAST, i));
+  clearTimeout(upTimer);
+  if (i !== cur) player.pause();
+  chs.forEach((c, k) => c.classList.toggle('on', k === i));
+  cur = i;
+  document.body.classList.toggle('intro', i === 0);
+  const slot = chs[i].querySelector('.slot');
+  if (slot) mountVideo(slot);
+  chs[i].scrollTop = 0;
+  $('prog').style.width = (i / LAST * 100) + '%';
+  $('where').innerHTML = i ? '<b>' + i + '</b> de ' + LAST + ' · ' + CH[i].t : '';
+  const nx = CH[i + 1];
+  $('next').style.visibility = nx ? 'visible' : 'hidden';
+  $('nextName').textContent = nx ? nx.t : '';
+  $('idxList').querySelectorAll('li').forEach((li, k) => li.classList.toggle('cur', k + 1 === i));
+  if (!fromHash) { try { history.replaceState(null, '', i ? '#c' + i : location.pathname + location.search); } catch(e) {} }
+};
+$('start').onclick = () => show(1);
+$('next').onclick = () => show(cur + 1);
+$('prev').onclick = () => show(cur - 1);
+$('again').onclick = () => show(1);
+
+// índice
+$('idxList').innerHTML = CH.slice(1).map((c, k) => '<li><button type="button" data-c="' + (k + 1) + '"><span class="k num">' + (k + 1) + '</span><span class="t">' + c.t + '</span><span class="d">' + c.d + '</span></button></li>').join('');
+$('idxOpen').onclick = () => $('index').classList.add('open');
+$('idxClose').onclick = () => $('index').classList.remove('open');
+$('idxList').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; $('index').classList.remove('open'); show(+b.dataset.c); });
+
+document.addEventListener('keydown', e => {
+  if ($('viewer').classList.contains('open')) { if (e.key === 'Escape') closeViewer(); return; }
+  if ($('index').classList.contains('open')) { if (e.key === 'Escape') $('index').classList.remove('open'); return; }
+  if (e.target.tagName === 'VIDEO') return;
+  if (cur === 3) { if (e.key === 'ArrowRight') { e.preventDefault(); goPage(dIdx() + 1); } if (e.key === 'ArrowLeft') { e.preventDefault(); goPage(dIdx() - 1); } return; }
+  if (e.key === 'ArrowRight') show(cur + 1);
+  if (e.key === 'ArrowLeft') show(cur - 1);
+});
+
+// abrir direto num capítulo: link#c4
+const fromHash = () => { const m = /^#c(\d)$/.exec(location.hash); if (m) show(+m[1], true); };
+window.addEventListener('hashchange', fromHash);
+fromHash();
+}
+</script>
+</body>
+</html>
